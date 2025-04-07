@@ -6,17 +6,24 @@ object paquete{ //Paquete pago por G. Lucas
     method pago(){
         return pago
     }
+
+    method pago(_pago){
+        pago = _pago
+    }
+
+    method puedeEntragarse(mensajero, destino){
+        return (self.pago() and destino.puedePasar(mensajero))
+  }
 }
 
 
 // mensajeros
 
 object chuckNorris{
-    const peso = 900
     const puedeLlamar = true
 
     method peso(){
-        return peso
+        return 900
     }
 
     method puedeLlamar(){
@@ -45,12 +52,8 @@ object lincolnHawk{
     var peso = 0
     const puedeLlamar = false
     var vehiculo = bicicleta
-    const pesoAcoplado = 500
-    var nroAcoplados = 0
-
-
     method peso(){
-        return peso + vehiculo.peso() + (nroAcoplados * pesoAcoplado)
+        return peso + vehiculo.peso()
     }
 
     method peso(_peso){
@@ -65,9 +68,7 @@ object lincolnHawk{
         return puedeLlamar
     }
 
-    method nroAcoplados(_nroAcoplados){
-        nroAcoplados = _nroAcoplados
-    }
+
 
 }
 
@@ -81,9 +82,15 @@ object bicicleta{
 
 object camion {
     const peso = 500
+    const pesoAcoplado = 500
+    var nroAcoplados = 0
 
     method peso() {
-      return peso
+      return peso + (nroAcoplados * pesoAcoplado)
+    }
+
+    method nroAcoplados(_nroAcoplados){
+        nroAcoplados = _nroAcoplados
     }
 }
 
@@ -102,11 +109,4 @@ object matrix {
     method puedePasar(mensajero){
         return (mensajero.puedeLlamar())
     } 
-}
-
-
-object testing {
-  method el_entregadoPor_En_(paquete, _mensajero, _destino){
-    return (paquete.pago() and _destino.puedePasar(_mensajero))
-  }
 }
